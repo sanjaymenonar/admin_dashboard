@@ -17,7 +17,7 @@ const {
 
 const db = require("./Models");
 db.sequelize
-  .sync({force:true})
+  .sync()
   .then(() => {
     console.log("Synced db.");
   })

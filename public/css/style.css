@@ -1,29 +1,24 @@
-body, html {
+body {
+    display: flex;
     margin: 0;
-    padding: 0;
     font-family: Arial, sans-serif;
 }
 
-#wrapper {
-    display: flex;
+#sidebar {
+    width: 200px;
+    background: #f4f4f4;
+    padding: 20px;
+    height: 100vh;
 }
 
-#sidebar {
-    width: 250px;
-    background-color: #f4f4f4;
+#main-content {
+    flex-grow: 1;
     padding: 20px;
 }
 
-#sidebar h2 {
-    margin-top: 0;
-}
-
 #sidebar ul {
+    list-style-type: none;
     padding: 0;
-}
-
-#sidebar ul li {
-    list-style: none;
 }
 
 #sidebar ul li a {
@@ -31,7 +26,17 @@ body, html {
     color: #333;
 }
 
-#content {
-    flex-grow: 1;
-    padding: 20px;
+.sales-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.sales-list th, .sales-list td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.sales-list th {
+    background-color: #f2f2f2;
 }

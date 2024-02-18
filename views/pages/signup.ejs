@@ -7,28 +7,42 @@
     <title>SignUp Form</title>
     <!-- Include Bootstrap CSS from CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .border-box {
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            /* Bootstrap's border color */
+            border-radius: 5px;
+            /* Bootstrap's border radius */
+            background-color: #fff;
+            /* White background */
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            /* Bootstrap's box shadow */
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <h1 class="text-center mt-5">SIGN UP</h1>
-                <form action="/user/signup" method="POST" class="mt-4">
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">SignUp</button>
-                </form>
-                <form action="/user/login" method="get">
-                    <button type="submit">LOGIN</button>
-                </form>
-
+                <div class="border-box">
+                    <h1 class="text-center mt-3">SIGN UP</h1>
+                    <form action="/user/signup" method="POST" class="mt-4">
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary">SignUp</button>
+                            <a href="/user/login" class="btn btn-secondary">Login</a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

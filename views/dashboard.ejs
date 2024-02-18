@@ -1,0 +1,48 @@
+<%- include('layout'); -%>
+
+    <h1>ADMIN Dashboard</h1>
+    <div class="sales-list">
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Phone Number</th>
+                    <th>Bill No</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- This will be filled dynamically by the script below -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchSalesData();
+        });
+
+        function fetchSalesData() {
+            fetch('/user/sales')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // For debugging
+                    updateSalesTable(data.item);
+                })
+                .catch(error => console.error('Error fetching sales data:', error));
+        }
+
+        function updateSalesTable(sales) {
+            const tableBody = document.querySelector('.sales-list tbody');
+            tableBody.innerHTML = ''; // Clear existing rows
+            sales.forEach(sale => {
+                const row = `<tr>
+                            <td>${sale.customerName}</td>
+                            <td>${sale.phoneNumber}</td>
+                            <td>${sale.billNo}</td>
+                            <td>${sale.amount}</td>
+                         </tr>`;
+                tableBody.innerHTML += row; // Append new rows to the table body
+            });
+        }
+    </script>

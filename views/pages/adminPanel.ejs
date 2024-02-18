@@ -267,14 +267,15 @@
                 gst: document.getElementById('gst').value,
                 gstAmt: document.getElementById('gstAmt').value,
                 total: document.getElementById('total').value,
-                // staff: document.getElementById('staff').value,
+                staff: document.getElementById('staff').value,
             };
-
-            // Add the itemData to the itemsArray
+            document.getElementById('amount').value = itemData.total * itemData.qty;
+            document.getElementById('gstAmount').value = itemData.gstAmt;
+            document.getElementById('grandTotal').value = (parseInt(itemData.gstAmt) + parseInt(itemData.total * itemData.qty))
             itemsArray.push(itemData);
             console.log(itemsArray);
 
-            // Optional: Clear the input fields here if desired
+
         });
         const saveButton = document.getElementById('save');
         const form = document.getElementById('myForm');
@@ -286,10 +287,20 @@
 
 
             form.submit();
+            //window.location.href = '/user/dashboard';
         });
         document.getElementById('clear').addEventListener('click', function () {
             var allInputs = document.querySelectorAll('input');
             allInputs.forEach(singleInput => singleInput.value = '');
+        });
+        document.getElementById('view').addEventListener('click', function () {
+            var billNo = document.getElementById('billNo').value;
+            fetch(`/user/get-bill?billNo=${encodeURIComponent(billNo)}`).then(response => response.json())
+                .then(data => {
+                }).catch(err => {
+                    console.log(err)
+                    alert("No Such Bill")
+                })
         })
     </script>
 

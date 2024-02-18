@@ -4,15 +4,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>B2B Sales Admin Panel</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        #sidebar {
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+
+        #main-content {
+            padding: 20px;
+        }
+
+        .sidebar-link {
+            color: #007bff;
+        }
+
+        .sidebar-link:hover {
+            color: #0056b3;
+            text-decoration: none;
+        }
+
+        .sales-tile {
+            margin-bottom: 20px;
+        }
+
+        .sales-tile .card {
+            width: 100%;
+        }
+
+        .no-sales {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="wrapper">
-        <% include partials/sidebar %>
-            <h1>Hai</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="sidebar-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link sidebar-link" href="/user/itemsPage">Add Item</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link sidebar-link" href="/user/admin_panel">Add Sales</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main role="main" id="main-content" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Dashboard</h1>
+                </div>
+
+                <% if (sales && sales.length> 0) { %>
+                    <div class="row">
+                        <% sales.forEach(function(sale) { %>
+                            <div class="col-md-4 sales-tile">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <%= sale.customerName %>
+                                        </h5>
+                                        <p class="card-text">Phone: <%= sale.phoneNumber %>
+                                        </p>
+                                        <p class="card-text">Bill No: <%= sale.billNo %>
+                                        </p>
+                                        <p class="card-text">Amount: <%= sale.amount %>
+                                        </p>
+                                        <button class="btn btn-danger delete-btn"
+                                            data-billno="<%= sale.billNo %>">Delete</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <% }); %>
+                    </div>
+                    <% } else { %>
+                        <div class="no-sales">
+                            <button class="btn btn-primary" onclick="location.href='/user/admin_panel'">Add
+                                Bill</button>
+                        </div>
+                        <% } %>
+
+            </main>
+        </div>
     </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteButtons = document.querySelectorAll('.delete-btn');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const billNo = this.getAttribute('data-billno');
+
+                    if (confirm('Are you sure you want to delete this bill?')) {
+                        fetch(`/user/delete-bill/${billNo}`, {
+                            method: 'DELETE',
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    return response.json();
+                                } else {
+                                    throw new Error('Failed to delete bill.');
+                                }
+                            })
+                            .then(data => {
+                                alert('Bill deleted successfully!');
+                                // Optionally, remove the tile from the DOM or refresh the page
+                                window.location.reload();
+                            })
+                            .catch(error => {
+                                alert(error.message);
+                            });
+                    }
+                });
+            });
+        });
+
+    </script>
+
 </body>
 
 </html>
