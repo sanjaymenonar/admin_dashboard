@@ -3,10 +3,13 @@ const User = db.users;
 const Item=db.items;
 const Sale=db.sales;
 const Op = db.Sequelize.Op;
+
+//render signup page
 exports.signup = (req, res) => {
   res.render("pages/signup");
 };
 
+// create a user
 exports.createUser = async(req, res) => {
   try {
  
@@ -45,12 +48,13 @@ if (checkData.length > 0) {
 }
 }
 
-
+// render login page
 exports.renderLogin = (req, res) => {
  
   res.render("pages/login");
 };
 
+// login credentials check
 exports.checkLoginCredentials=async(req,res)=>{
   try {
     console.log("dfgf")
@@ -74,10 +78,13 @@ exports.checkLoginCredentials=async(req,res)=>{
   }
 }
 
+//render admin panel
 exports.renderAdminPanel = (req, res) => {
  
   res.render("pages/adminPanel");
 };
+
+//render dashboard
 exports.renderDashBoard = async(req, res) => {
     let sales=await Sale.findAll({});
     res.render('layout', {
@@ -85,17 +92,21 @@ exports.renderDashBoard = async(req, res) => {
     });
 };
 
+
+// render item page
 exports.renderItemPage = (req, res) => {
  
   res.render("pages/items");
 };
 
+// render bill
 exports.renderBill = (req, res) => {
  
     res.render("pages/bill");
   };
   
 
+// fetch item details  
 exports.getItemDetails=async(req,res)=>{
   const itemName = req.query.itemName;
    console.log("check",itemName)
@@ -119,6 +130,7 @@ exports.getItemDetails=async(req,res)=>{
 
 }
 
+//save bill details
 exports.saveBill=async(req,res)=>{
   try {
  console.log("ne",req.body)
@@ -139,7 +151,7 @@ exports.saveBill=async(req,res)=>{
 
 
 
-
+//save item details
 exports.saveItem=async(req,res)=>{
   try {
  
@@ -158,6 +170,7 @@ exports.saveItem=async(req,res)=>{
 }
 }
 
+//fetch bill details
 exports.getBill=async(req,res)=>{
     const billNo = req.query.billNo;
     

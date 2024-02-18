@@ -1,1 +1,50 @@
-<h1>hai</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Details</title>
+</head>
+
+<body>
+    <h1>Billing Details</h1>
+    <p>Bill No: <%= billingDetails.billNo %>
+    </p>
+    <p>Bill Date: <%= billingDetails.billDate %>
+    </p>
+    <p>Eway Bill Number: <%= billingDetails.ewayBillNumber %>
+    </p>
+    <p>Delivery Date: <%= billingDetails.deliveryDate %>
+    </p>
+    <p>Customer Name: <%= billingDetails.customerName %>
+    </p>
+    <p>Phone Number: <%= billingDetails.phoneNumber %>
+    </p>
+    <p>Address: <%= billingDetails.address %>
+    </p>
+    <p>Delivery Address: <%= billingDetails.deliveryAddress %>
+    </p>
+    <p>Transaction Mode: <%= billingDetails.transactionMode %>
+    </p>
+    <p>IS IGST: <%= billingDetails.isIGST ? 'Yes' : 'No' %>
+    </p>
+
+
+    <p>Outstanding: <%= billingDetails.outstanding %>
+    </p>
+    <p>Discount: <%= billingDetails.discount %>
+    </p>
+    <p>GST Amount: <%= billingDetails.gstAmount %>
+    </p>
+    <p>Payment Method: <%= billingDetails.paymentMethod %>
+    </p>
+    <p>Amount: <%= billingDetails.amount %>
+    </p>
+    <p>Roundoff: <%= billingDetails.roundoff %>
+    </p>
+    <p>Grand Total: <%= billingDetails.grandTotal %>
+    </p>
+</body>
+
+</html>

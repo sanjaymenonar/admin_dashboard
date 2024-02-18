@@ -23,4 +23,8 @@ db.items = require("./items.js")(sequelize, Sequelize);
 
 db.sales=require("./sales.js")(sequelize, Sequelize);
 
+
+
+
+
 module.exports = db;
